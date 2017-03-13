@@ -23,6 +23,7 @@ class InstagramFeedViewController: UIViewController, UITableViewDelegate, UITabl
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 150
 
+        self.tableView.reloadData()
         // Do any additional setup after loading the view.
     }
     
@@ -30,7 +31,8 @@ class InstagramFeedViewController: UIViewController, UITableViewDelegate, UITabl
         super.viewDidAppear(true)
         
         let query = PFQuery(className: "Post")
-        query.order(byDescending: "createdAt")
+        query.order(byDescending: "_created_at")
+        query.includeKey("author")
         query.limit = 20
         
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) -> Void in
@@ -42,6 +44,7 @@ class InstagramFeedViewController: UIViewController, UITableViewDelegate, UITabl
                 print(error?.localizedDescription)
             }
         }
+        self.tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -62,6 +65,7 @@ class InstagramFeedViewController: UIViewController, UITableViewDelegate, UITabl
         
         let post = feed[indexPath.row]
         cell.captionLabel.text = post["caption"] as! String?
+        cell.usernameLabel.text = post["username"] as! String?
         
         let photo = post["media"] as! PFFile
         photo.getDataInBackground { (data: Data?, error: Error?) in

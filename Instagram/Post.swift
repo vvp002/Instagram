@@ -13,6 +13,9 @@ import Parse
 class Post: NSObject {
     var photo: UIImage?
     var caption: String?
+    var likesCount: Int = 0
+    var commentsCount: Int = 0
+    
     
     init(photo: UIImage, caption: String) {
         self.photo = photo
@@ -25,7 +28,8 @@ class Post: NSObject {
         
         post["caption"] = caption
         post["author"] = PFUser.current()
-        
+        post["likesCount"] = 0
+        post["commentsCount"] = 0
         post["media"] = getPhotoFile(photo: photo)
         
         post.saveInBackground(block: success)

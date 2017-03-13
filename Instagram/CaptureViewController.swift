@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class CaptureViewController: UIViewController {
+class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var defaultLabel: UILabel!
     @IBOutlet weak var submitButton: UIButton!
@@ -46,6 +46,15 @@ class CaptureViewController: UIViewController {
         
     }
 
+    @IBAction func selectImageFromLibrary(_ sender: UITapGestureRecognizer) {
+        let imagePickerController = UIImagePickerController()
+        
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        imagePickerController.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        
+        self.present(imagePickerController, animated: true, completion: nil)
+    }
     func resize(photo: UIImage, newSize: CGSize) -> UIImage {
         let resizedImage = UIImageView(frame: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
         resizedImage.contentMode = UIViewContentMode.scaleAspectFill
@@ -56,6 +65,31 @@ class CaptureViewController: UIViewController {
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return newImage!
+    }
+    
+    
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [String : Any]) {
+        // Get the image captured by the UIImagePickerController
+        guard let originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage
+        else {
+            print("Error when picking an image")
+            fatalError("Error when picking an image")
+        }
+        
+        photoImageView.image = originalImage
+        defaultLabel.isHidden = true
+        self.captionTextField.text = ""
+        self.captionTextField.textColor = UIColor.darkGray
+        
+        // Dismiss UIImagePickerController to go back to your original view controller
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        
+        defaultLabel.isHidden = false
+        dismiss(animated: true, completion: nil)
     }
     /*
     // MARK: - Navigation
