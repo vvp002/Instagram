@@ -38,7 +38,7 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
                 print(error?.localizedDescription ?? "")
             }
         }
-        
+        self.tabBarController?.selectedIndex = 0
         self.captionTextField.text = "Please add a caption"
         self.captionTextField.textColor = UIColor.darkGray
         photoImageView.isHidden = false

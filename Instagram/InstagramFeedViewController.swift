@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import MBProgressHUD
 
 class InstagramFeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -35,15 +36,22 @@ class InstagramFeedViewController: UIViewController, UITableViewDelegate, UITabl
         query.includeKey("author")
         query.limit = 20
         
+        // Display HUD right before the request is made
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) -> Void in
             if let posts = posts {
                 self.feed = posts
                 self.tableView.reloadData()
+                
+                // Hide HUD once the network request comes back (must be done on main UI thread)
+                MBProgressHUD.hide(for: self.view, animated: true)
             }
             else {
                 print(error?.localizedDescription ?? "")
             }
         }
+        self.tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
