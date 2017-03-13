@@ -50,7 +50,7 @@ class LoginViewController: UIViewController {
                 print("Yay, created a user")
                 self.performSegue(withIdentifier: "loginSegue", sender: nil)
             } else {
-                print(error?.localizedDescription)
+                print(error?.localizedDescription ?? "")
                 
                 if error?._code == 202 {
                     print("Username is taken")

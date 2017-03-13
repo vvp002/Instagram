@@ -41,10 +41,9 @@ class InstagramFeedViewController: UIViewController, UITableViewDelegate, UITabl
                 self.tableView.reloadData()
             }
             else {
-                print(error?.localizedDescription)
+                print(error?.localizedDescription ?? "")
             }
         }
-        self.tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -73,7 +72,7 @@ class InstagramFeedViewController: UIViewController, UITableViewDelegate, UITabl
                 cell.photoImageView.image = UIImage(data: data)
             }
             else {
-                print(error?.localizedDescription)
+                print(error?.localizedDescription ?? "")
             }
         }
         

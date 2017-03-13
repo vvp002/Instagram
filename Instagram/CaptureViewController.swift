@@ -35,7 +35,7 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
             if success {
                 self.tabBarController?.selectedIndex = 0
             } else {
-                print(error?.localizedDescription)
+                print(error?.localizedDescription ?? "")
             }
         }
         
@@ -55,6 +55,7 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         self.present(imagePickerController, animated: true, completion: nil)
     }
+    
     func resize(photo: UIImage, newSize: CGSize) -> UIImage {
         let resizedImage = UIImageView(frame: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
         resizedImage.contentMode = UIViewContentMode.scaleAspectFill
