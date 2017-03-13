@@ -42,6 +42,7 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.captionTextField.text = "Please add a caption"
         self.captionTextField.textColor = UIColor.darkGray
         photoImageView.isHidden = false
+        photoImageView.image = nil
         defaultLabel.isHidden = false
         
     }

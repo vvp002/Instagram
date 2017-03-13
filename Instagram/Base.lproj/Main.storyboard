@@ -197,7 +197,6 @@
                                 <state key="normal" title="Submit"/>
                                 <connections>
                                     <action selector="onSubmit:" destination="FtB-CW-SP8" eventType="touchUpInside" id="PmZ-6T-tz7"/>
-                                    <segue destination="hGl-MC-nrw" kind="show" identifier="submitSegue" id="0RQ-bP-F0V"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to take or select a photo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uCZ-73-wih">
@@ -272,7 +271,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="dEz-xA-3kv">
-                                <rect key="frame" x="133" y="269" width="55" height="30"/>
+                                <rect key="frame" x="132.5" y="269" width="55" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aIQ-HA-k19">
                                         <rect key="frame" x="0.0" y="0.0" width="55" height="30"/>
@@ -303,7 +302,4 @@
         <image name="Icon-App-20x20-1" width="20" height="20"/>
         <image name="Icon-App-20x20-2" width="20" height="20"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="0RQ-bP-F0V"/>
-    </inferredMetricsTieBreakers>
 </document>
