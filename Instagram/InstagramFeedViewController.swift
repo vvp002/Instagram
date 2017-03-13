@@ -19,39 +19,45 @@ class InstagramFeedViewController: UIViewController, UITableViewDelegate, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Instantiate tableView
         self.tableView.delegate = self
         self.tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 150
 
+        //Reload tableView data
         self.tableView.reloadData()
+        
         // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
+        //Constructing query
         let query = PFQuery(className: "Post")
         query.order(byDescending: "_created_at")
         query.includeKey("author")
         query.limit = 20
         
         // Display HUD right before the request is made
-        MBProgressHUD.showAdded(to: self.view, animated: true)
+        //MBProgressHUD.showAdded(to: self.view, animated: true)
         
+        //Fetching data asynchronously from Parse with PFQuery
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) -> Void in
             if let posts = posts {
                 self.feed = posts
                 self.tableView.reloadData()
                 
-                // Hide HUD once the network request comes back (must be done on main UI thread)
-                MBProgressHUD.hide(for: self.view, animated: true)
             }
             else {
                 print(error?.localizedDescription ?? "")
             }
         }
         self.tableView.reloadData()
+        
+        // Hide HUD once the network request comes back
+        //MBProgressHUD.hide(for: self.view, animated: true)
     }
 
     override func didReceiveMemoryWarning() {
@@ -64,16 +70,19 @@ class InstagramFeedViewController: UIViewController, UITableViewDelegate, UITabl
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //Return feed count for number of cells in tableView
         return feed.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell", for: indexPath) as! PostTableViewCell
         
+        //Initialize caption and username labels from the post
         let post = feed[indexPath.row]
         cell.captionLabel.text = post["caption"] as! String?
         cell.usernameLabel.text = post["username"] as! String?
         
+        //Retrieve photo data and update the cell's image with it
         let photo = post["media"] as! PFFile
         photo.getDataInBackground { (data: Data?, error: Error?) in
             if let data = data {
@@ -83,7 +92,6 @@ class InstagramFeedViewController: UIViewController, UITableViewDelegate, UITabl
                 print(error?.localizedDescription ?? "")
             }
         }
-        
         return cell
     }
     /*

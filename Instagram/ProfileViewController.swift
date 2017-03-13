@@ -23,6 +23,8 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func onLogOut(_ sender: Any) {
+        
+        //Allow the user to log out of "Instagram and return to login page
         PFUser.logOutInBackground()
         self.performSegue(withIdentifier: "logoutSegue", sender: nil)
     }

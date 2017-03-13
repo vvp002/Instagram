@@ -13,13 +13,15 @@ import Parse
 class Post: NSObject {
     var photo: UIImage?
     var caption: String?
+    var username: String?
     var likesCount: Int = 0
     var commentsCount: Int = 0
     
-    
-    init(photo: UIImage, caption: String) {
+    //Initiate the post
+    init(photo: UIImage, caption: String, username: String) {
         self.photo = photo
         self.caption = caption
+        self.username = username
     }
     
     class func postPhoto(photo: UIImage, caption: String?, success: PFBooleanResultBlock?) {

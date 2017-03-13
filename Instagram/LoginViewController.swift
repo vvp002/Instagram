@@ -26,6 +26,8 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     @IBAction func onSignin(_ sender: Any) {
+        
+        //Let the user log in
         PFUser.logInWithUsername(inBackground: usernameField.text!, password: passwordField.text!) {
                 (user: PFUser?, error: Error?) -> Void in
             if user != nil {
