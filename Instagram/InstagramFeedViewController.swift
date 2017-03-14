@@ -41,7 +41,7 @@ class InstagramFeedViewController: UIViewController, UITableViewDelegate, UITabl
         query.limit = 20
         
         // Display HUD right before the request is made
-        //MBProgressHUD.showAdded(to: self.view, animated: true)
+        MBProgressHUD.showAdded(to: self.view, animated: true)
         
         //Fetching data asynchronously from Parse with PFQuery
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) -> Void in
@@ -57,7 +57,7 @@ class InstagramFeedViewController: UIViewController, UITableViewDelegate, UITabl
         self.tableView.reloadData()
         
         // Hide HUD once the network request comes back
-        //MBProgressHUD.hide(for: self.view, animated: true)
+        MBProgressHUD.hide(for: self.view, animated: true)
     }
 
     override func didReceiveMemoryWarning() {
